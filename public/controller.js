@@ -7,6 +7,8 @@ window.onload = function () {
       var removeButton;
       var listItem;
       var textItem;
+      var textArea;
+
       checkbox = document.createElement('input');
       checkbox.setAttribute('type', 'checkbox');
 
@@ -15,18 +17,19 @@ window.onload = function () {
       removeButton.className = 'close-button';
 
       removeButton.onclick = function () {
-          console.log('remove button clicked!!');
-          var listDom = document.getElementById('list');
-
+          listStorage.splice(index, 1);
           listDom.removeChild(listItem);
       };
 
       listItem = document.createElement('div');
-      textItem = document.createTextNode(index + '. ' + item);
+      textArea = document.createElement('p');
+      textItem = document.createTextNode(item);
+
+      textArea.appendChild(textItem);
 
       listItem.className = 'list-item';
       listItem.appendChild(checkbox);
-      listItem.appendChild(textItem);
+      listItem.appendChild(textArea);
       listItem.appendChild(removeButton);
 
       return listItem;
@@ -38,8 +41,12 @@ window.onload = function () {
 
       if(!listStorage) {return;}
 
+      while(listDom.hasChildNodes()) {
+        listDom.removeChild(listDom.lastChild);
+      }
+
       listStorage.forEach(function (item, index) {
-          listDom.appendChild(createListItem(index+1, item));
+          listDom.appendChild(createListItem(index, item));
       });
   };
 
@@ -47,18 +54,12 @@ window.onload = function () {
 
   todo.addEventListener('keydown', function (e) {
     if(e.keyCode === 13) {
-      var item;
 
       listStorage.push(todo.value);
 
-      item = createListItem(listStorage.length, todo.value);
-      listDom.appendChild(item);
+      loadData(listStorage);
 
       todo.value = '';
     }
   });
-
-
-
-
 };
