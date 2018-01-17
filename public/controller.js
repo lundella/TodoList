@@ -2,7 +2,7 @@ window.onload = function () {
   var listStorage = ['reading', 'writing'];
   var todo = document.getElementById('todo');
   var listDom = document.getElementById('list');
-  var createListItem = function (index, item) {
+  function createListItem(index, name) {
       var checkbox;
       var removeButton;
       var listItem;
@@ -17,13 +17,19 @@ window.onload = function () {
       removeButton.className = 'close-button';
 
       removeButton.onclick = function () {
-          listStorage.splice(index, 1);
-          listDom.removeChild(listItem);
+        listStorage.forEach(function (item, index) {
+          if(item === name) {
+            listStorage.splice(index, 1);
+          }
+        });
+
+        listDom.removeChild(listItem);
+        console.log(listStorage);
       };
 
       listItem = document.createElement('div');
       textArea = document.createElement('p');
-      textItem = document.createTextNode(item);
+      textItem = document.createTextNode(name);
 
       textArea.appendChild(textItem);
 
@@ -33,9 +39,9 @@ window.onload = function () {
       listItem.appendChild(removeButton);
 
       return listItem;
-  };
+  }
 
-  var loadData = function (list) {
+  function loadData(list) {
       var listStorage = list;
       var listDom = document.getElementById('list');
 
@@ -48,7 +54,7 @@ window.onload = function () {
       listStorage.forEach(function (item, index) {
           listDom.appendChild(createListItem(index, item));
       });
-  };
+  }
 
   loadData(listStorage);
 
@@ -57,7 +63,8 @@ window.onload = function () {
 
       listStorage.push(todo.value);
 
-      loadData(listStorage);
+      listDom.appendChild(createListItem(listStorage.length, todo.value));
+      console.log(listStorage);
 
       todo.value = '';
     }
