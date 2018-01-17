@@ -56,4 +56,5 @@ body {
     border-radius: 40%;
     text-align: center;
     cursor: pointer;
+    background-color: transparent;
 }

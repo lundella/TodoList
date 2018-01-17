@@ -10,18 +10,18 @@ window.onload = function () {
       checkbox = document.createElement('input');
       checkbox.setAttribute('type', 'checkbox');
 
-      removeButton = document.createElement('span');
-      removeButton.appendChild(document.createTextNode('x'));
+      removeButton = document.createElement('button');
+      removeButton.innerHTML = 'X';
       removeButton.className = 'close-button';
 
-      removeButton.addEventListener('click', function (e) {
+      removeButton.onclick = function () {
           console.log('remove button clicked!!');
           var listDom = document.getElementById('list');
 
           listDom.removeChild(listItem);
-      });
+      };
 
-      listItem = document.createElement('p');
+      listItem = document.createElement('div');
       textItem = document.createTextNode(index + '. ' + item);
 
       listItem.className = 'list-item';
