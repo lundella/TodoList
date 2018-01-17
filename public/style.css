@@ -44,7 +44,7 @@ body {
 .list-item p {
     margin: 0;
     padding: 0;
-    width: 250px;
+    width: 245px;
     display: inline-block;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -58,6 +58,7 @@ body {
     padding: 0;
     transform: scale(1.3);
     width: 20px;
+    vertical-align: middle;
 }
 
 .close-button {
@@ -70,4 +71,5 @@ body {
     text-align: center;
     cursor: pointer;
     background-color: transparent;
+    vertical-align: middle;
 }
