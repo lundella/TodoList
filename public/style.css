@@ -4,6 +4,7 @@ body {
     background-position: 50% 50%;
     background-attachment: fixed;
     background-size: cover;
+    font-family: 'Roboto', sans-serif;
 }
 
 .title {
@@ -44,7 +45,7 @@ body {
 .list-item p {
     margin: 0;
     padding: 0;
-    width: 245px;
+    width: 240px;
     display: inline-block;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -59,6 +60,11 @@ body {
     transform: scale(1.3);
     width: 20px;
     vertical-align: middle;
+    background-color: white;
+}
+.list-item input[checked=true] {
+    text-decoration: line-through;
+    color: darkgray;
 }
 
 .close-button {
@@ -66,8 +72,8 @@ body {
     width: 20px;
     height: 20px;
     color: white;
-    border: 1px solid ivory;
-    border-radius: 40%;
+    font-size: 15px;
+    border: none;
     text-align: center;
     cursor: pointer;
     background-color: transparent;
