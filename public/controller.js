@@ -12,6 +12,21 @@ window.onload = function () {
       checkbox = document.createElement('input');
       checkbox.setAttribute('type', 'checkbox');
 
+      checkbox.onclick = function () {
+        var self = this;
+        var checked = false;
+
+        console.log('self',self);
+
+        if(self.getAttribute('checked') !== true) {
+          checked = true;
+          console.log('inner set true', self.getAttribute('checked'));
+        }
+        console.log('outer set click', checked, typeof checkbox.getAttribute('checked'));
+        self.setAttribute('checked', checked);
+
+      };
+
       removeButton = document.createElement('button');
       removeButton.innerHTML = 'X';
       removeButton.className = 'close-button';
@@ -24,7 +39,6 @@ window.onload = function () {
         });
 
         listDom.removeChild(listItem);
-        console.log(listStorage);
       };
 
       listItem = document.createElement('div');
@@ -64,7 +78,6 @@ window.onload = function () {
       listStorage.push(todo.value);
 
       listDom.appendChild(createListItem(listStorage.length, todo.value));
-      console.log(listStorage);
 
       todo.value = '';
     }

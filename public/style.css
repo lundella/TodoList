@@ -62,9 +62,14 @@ body {
     vertical-align: middle;
     background-color: white;
 }
-.list-item input[checked=true] {
+.list-item input[checked=true] + p {
     text-decoration: line-through;
     color: darkgray;
+}
+
+.list-item input[checked=false] + p {
+    text-decoration: none;
+    color: blanchedalmond;
 }
 
 .close-button {
