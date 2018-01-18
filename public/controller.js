@@ -2,40 +2,70 @@ window.onload = function () {
   var listStorage = ['reading', 'writing'];
   var todo = document.getElementById('todo');
   var listDom = document.getElementById('list');
-  var createListItem = function (index, item) {
-      var checkbox;
-      var removeButton;
-      var listItem;
-      var textItem;
-      var textArea;
 
-      checkbox = document.createElement('input');
-      checkbox.setAttribute('type', 'checkbox');
+  function createListItem(index, name) {
+      var listItem = document.createElement('div');
+      var textItem = document.createTextNode(name);
+      var textArea = document.createElement('p');
 
-      removeButton = document.createElement('button');
-      removeButton.innerHTML = 'X';
-      removeButton.className = 'close-button';
-
-      removeButton.onclick = function () {
-          listStorage.splice(index, 1);
-          listDom.removeChild(listItem);
-      };
-
-      listItem = document.createElement('div');
-      textArea = document.createElement('p');
-      textItem = document.createTextNode(item);
+      var checkbox = createCheckbox(listItem);
+      var removeButton = createRemoveButton(listItem);
 
       textArea.appendChild(textItem);
-
       listItem.className = 'list-item';
       listItem.appendChild(checkbox);
       listItem.appendChild(textArea);
       listItem.appendChild(removeButton);
 
       return listItem;
-  };
+  }
 
-  var loadData = function (list) {
+  function createCheckbox(listItem) {
+      var checkbox;
+      var doList = document.getElementById('list');
+      var doneList = document. getElementById('done');
+
+      checkbox = document.createElement('input');
+      checkbox.setAttribute('type', 'checkbox');
+
+      checkbox.onclick = function () {
+          var self = this;
+          var checked = false;
+
+          if(self.getAttribute('checked') !== "true") {
+              checked = true;
+              doneList.appendChild(listItem);
+          } else {
+              doList.appendChild(listItem);
+          }
+
+          self.setAttribute('checked', checked);
+      };
+
+      return checkbox;
+  }
+
+  function createRemoveButton(listItem) {
+      var removeButton;
+
+      removeButton = document.createElement('button');
+      removeButton.innerHTML = 'X';
+      removeButton.className = 'close-button';
+
+      removeButton.onclick = function () {
+          listStorage.forEach(function (item, index) {
+              if(item === name) {
+                  listStorage.splice(index, 1);
+              }
+          });
+
+          listDom.removeChild(listItem);
+      };
+
+      return removeButton
+  }
+
+  function loadData(list) {
       var listStorage = list;
       var listDom = document.getElementById('list');
 
@@ -48,16 +78,17 @@ window.onload = function () {
       listStorage.forEach(function (item, index) {
           listDom.appendChild(createListItem(index, item));
       });
-  };
+  }
 
   loadData(listStorage);
 
+  // 항목 추가 기능
   todo.addEventListener('keydown', function (e) {
     if(e.keyCode === 13) {
 
       listStorage.push(todo.value);
 
-      loadData(listStorage);
+      listDom.appendChild(createListItem(listStorage.length, todo.value));
 
       todo.value = '';
     }

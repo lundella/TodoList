@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, user-scalable=no">
     <title>Todo List</title>
     <link rel="stylesheet" type="text/css" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <script type="text/javascript" src="controller.js"></script>
 </head>
 <body>
@@ -14,7 +15,17 @@
         <input id="todo" class="input-window" type="text"/>
     </div>
 
-    <div id="list" class="list-area"></div>
+    <div class="contents-area">
+        <div class="list-area">
+            <div class="list-title">Todo</div>
+            <div id="list" class="list-contents"></div>
+        </div>
+        <div class="list-area">
+            <div class="list-title">Done</div>
+            <div id="done" class="list-contents"></div>
+        </div>
+    </div>
+
 </div>
 </body>
 </html>
