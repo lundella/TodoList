@@ -7,6 +7,7 @@ window.onload = function () {
       var listItem = document.createElement('div');
       var textItem = document.createTextNode(name);
       var textArea = document.createElement('p');
+
       var checkbox = createCheckbox(listItem);
       var removeButton = createRemoveButton(listItem);
 
@@ -19,8 +20,10 @@ window.onload = function () {
       return listItem;
   }
 
-  function createCheckbox() {
+  function createCheckbox(listItem) {
       var checkbox;
+      var doList = document.getElementById('list');
+      var doneList = document. getElementById('done');
 
       checkbox = document.createElement('input');
       checkbox.setAttribute('type', 'checkbox');
@@ -31,7 +34,11 @@ window.onload = function () {
 
           if(self.getAttribute('checked') !== "true") {
               checked = true;
+              doneList.appendChild(listItem);
+          } else {
+              doList.appendChild(listItem);
           }
+
           self.setAttribute('checked', checked);
       };
 
@@ -75,6 +82,7 @@ window.onload = function () {
 
   loadData(listStorage);
 
+  // 항목 추가 기능
   todo.addEventListener('keydown', function (e) {
     if(e.keyCode === 13) {
 
